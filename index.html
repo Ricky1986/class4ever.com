@@ -8,13 +8,33 @@
 </head>
 
 <body>
-
-    This is my github pages.
-    <br>
-    My name is Ricky C..
-    <br>
-    今天是几号呢?
+    <div id="app">
+        This is my github pages.
+        <br>
+        My name is Ricky C..
+        <br>
+        今天是几号呢?
+        <br>
+        {{time}}
+    </div>
 
 </body>
+<script src="//static.class4ever.com/vuejs/v2.6.10/vue.min.js"></script>
+<script>
+    // let time = new Date()
+    // console.log(time)
+
+    //Vue
+    const app = new Vue({
+        el: '#app',
+        data: {
+            time: 0
+        },
+    })
+
+    const doing = setInterval(function () {
+        app.time = new Date()
+    }, 100);
+</script>
 
 </html>
