@@ -5,14 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ricky's Github Pages</title>
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="app.css">
 </head>
 
 <body>
+    <!-- 主页面 -->
     <div id="app" v-cloak>
         This is my github pages.
         <br>
@@ -24,24 +21,11 @@
         <br>
         123, 321, lululalalei
     </div>
-
+    <!-- /主页面 -->
 </body>
+
+
 <script src="//static.class4ever.com/vuejs/v2.6.10/vue.min.js"></script>
-<script>
-    // let time = new Date()
-    // console.log(time)
-
-    //Vue
-    const app = new Vue({
-        el: '#app',
-        data: {
-            time: 0
-        },
-    })
-
-    const doing = setInterval(function () {
-        app.time = new Date()
-    }, 100);
-</script>
+<script src="app.js"></script>
 
 </html>
