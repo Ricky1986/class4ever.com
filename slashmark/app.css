@@ -10,6 +10,10 @@
     position: relative;
 }
 
+/* .line>div>div:first-child {
+    border: 1px solid red;
+} */
+
 .title {
     text-align: center;
     background: grey;
@@ -23,5 +27,5 @@
 
 textarea {
     padding: 10px;
-    line-height:32px;
+    line-height: 32px;
 }

@@ -19,7 +19,7 @@
             <!-- slashmark代码 -->
             <div style="border:0;">
                 <div class="show" style="padding-right:22px;">
-                    <textarea style="width:100%;height:99%;font-size:20px;" v-model="slashMark"></textarea>
+                    <textarea style="width:100%;height:99%;font-size:16px;" v-model="slashMark"></textarea>
                 </div>
                 <div class="title">Slashmark 代码</div>
             </div>
@@ -27,14 +27,14 @@
 
             <!-- 呈现样式 -->
             <div>
-                <div class="show" v-html="toShow" style="padding:10px;"></div>
+                <div class="show" v-html="toShow" style="padding:10px;overflow: auto;"></div>
                 <div class="title">呈现</div>
             </div>
             <!-- /呈现样式 -->
 
             <!-- 转为html -->
             <div>
-                <div class="show" style="padding:10px;">{{run(slashMark)}}</div>
+                <div class="show" style="padding:10px;word-wrap: break-word;overflow: auto;">{{run(slashMark)}}</div>
                 <div class="title">转为html</div>
             </div>
             <!-- /转为html -->

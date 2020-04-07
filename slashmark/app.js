@@ -22,7 +22,7 @@ $(document).ready(function () {
         $('.line').height(windowHeight - 300)
 
         //调整line的第一个孩子的高度
-        $('.show').height(windowHeight - 330)
+        $('.show').height(windowHeight - 352)
     }
 
     //开始
@@ -34,7 +34,7 @@ $(document).ready(function () {
 const app = new Vue({
     el: '#app',
     data: {
-        slashMark: '您好, 欢迎使用[b][i]Class4ever.com Slashmark[/i][/b] 语言\n[i]这是斜体[/i]\n\n这是换行\n\n[b]这是粗体[/b]\n'
+        slashMark: "您好, 欢迎使用[b][i]Class4ever.com Slashmark[/i][/b] 语言\n[i]这是斜体[/i]\n\n这是换行\n\n[b]这是粗体[/b]\n"
     },
     methods: {
         run: function (str) {
