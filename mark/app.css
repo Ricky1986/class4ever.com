@@ -1,0 +1,27 @@
+.line {
+    display: flex;
+}
+
+.line>div {
+    border: 1px solid grey;
+    height: 100%;
+    width: 33%;
+    margin-right: 4px;
+    position: relative;
+}
+
+.title {
+    text-align: center;
+    background: grey;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 30px;
+    line-height: 30px;
+}
+
+textarea {
+    padding: 10px;
+    line-height:32px;
+}
