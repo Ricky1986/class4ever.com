@@ -1,9 +1,14 @@
+body {
+    background: #000;
+    color:#fff;
+}
+
 .line {
     display: flex;
 }
 
 .line>div {
-    border: 1px solid grey;
+    border: 1px solid #333;
     height: 100%;
     width: 33%;
     margin-right: 4px;
@@ -16,7 +21,7 @@
 
 .title {
     text-align: center;
-    background: grey;
+    background: #333;
     color: #fff;
     position: absolute;
     width: 100%;
@@ -28,4 +33,6 @@
 textarea {
     padding: 10px;
     line-height: 32px;
+    background:#000;
+    color:#fff;
 }
