@@ -30,5 +30,4 @@ $(document).ready(function () {
 
     /**开始 */
     main() //激活主进程
-
 })

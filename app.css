@@ -2,6 +2,15 @@
     display: none;
 }
 
-.card {
-    margin-bottom: 20px;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.project{
+    width:200px;
+}
+
+.project .card-body{
+    min-height:120px;
 }

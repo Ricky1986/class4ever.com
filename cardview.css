@@ -1,0 +1,21 @@
+.card {
+    border: 1px solid #999;
+    border-radius: 5px;
+    margin: 0 10px 20px;
+}
+
+.card>div {
+    padding: 5px;
+}
+
+.card-body {
+    line-height: 30px;
+}
+
+.card-single {
+    padding: 10px;
+}
+
+.card>div:not(:last-child) {
+    border-bottom: 1px solid #999;
+}
