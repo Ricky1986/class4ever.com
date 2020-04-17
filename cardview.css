@@ -8,6 +8,10 @@
     padding: 5px;
 }
 
+.card-title{
+    font-weight:900;
+}
+
 .card-body {
     line-height: 30px;
 }
