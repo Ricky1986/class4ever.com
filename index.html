@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
@@ -14,21 +14,25 @@
 <body>
     <!-- 主页面 -->
     <div id="app" v-cloak style="width:800px;padding:20px;">
+
+        <!-- 页面标题 -->
         <div class="card card-single">
             <h2>Class4ever Pages</h2>
         </div>
 
-
+        <!-- 项目 -->
         <div class="card">
             <div class="card-title">项目</div>
-            <div class="card-body" style="display:flex;">
-
+            <div class="card-body" style="display:flex;padding:20px;">
                 <div class="card project">
                     <div class="card-body">
                         <h2>Slashmark</h2>
+                        <div class="desc">
+                            Version: 0.1<br>
+                        </div>
                     </div>
                     <div class="card-footer">
-                        <a href="/slashmark" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
+                        <a href="/slashmark/" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
                     </div>
                 </div>
 
@@ -43,16 +47,19 @@
                 <div class="card project">
                     <div class="card-body">
                         <h2>Admin UI</h2>
+                        <div class="desc">
+                            Version: 0.1<br>
+                            基于Vue.js和jQuery的后台前端样式
+                        </div>
                     </div>
                     <div class="card-footer">
-                        <a href="/admin_ui" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
+                        <a href="/admin_ui/" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
                     </div>
                 </div>
-
             </div>
         </div>
 
-
+        <!-- 涂鸦 -->
         <div class="card">
             <div class="card-title">
                 涂鸦
@@ -70,6 +77,7 @@
             </div>
         </div>
 
+        <!-- 内容 -->
         <div class="card">
             <div class="card-body">
                 <div>
@@ -85,7 +93,6 @@
             </div>
         </div>
     </div>
-    <!-- /主页面 -->
 </body>
 <script src="//static.class4ever.com/jquery/jquery-3.4.1.min.js"></script>
 <script src="//static.class4ever.com/layui/v2.5.5/layui.all.js"></script>
