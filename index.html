@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class4ever Pages</title>
     <link rel="stylesheet" href="//static.class4ever.com/layui/v2.5.5/css/layui.css">
     <link rel="stylesheet" href="/cardview.css">
     <link rel="stylesheet" href="app.css">
@@ -17,45 +16,29 @@
 
         <!-- 页面标题 -->
         <div class="card card-single">
-            <h2>Class4ever Pages</h2>
+            <h2>{{siteTitle}}</h2>
         </div>
 
         <!-- 项目 -->
         <div class="card">
             <div class="card-title">项目</div>
-            <div class="card-body" style="display:flex;padding:20px;">
-                <div class="card project">
+            <div class="card-body" style="display:flex;padding:20px;flex-flow:row wrap;">
+
+                <!-- 项目单一卡片 -->
+                <div class="card project" v-for="(v,k) in project">
                     <div class="card-body">
-                        <h2>Slashmark</h2>
+                        <h2>{{v.title}}</h2>
                         <div class="desc">
-                            Version: 0.1<br>
+                            Version: {{v.ver}}<br>
+                            <span v-html="v.desc"></span>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <a href="/slashmark/" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
+                    <div class="card-footer" v-if="v.uri">
+                        <a :href="v.uri" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
                     </div>
                 </div>
+                <!-- /项目单一卡片 -->
 
-                <div class="card card-single project">
-                    <h2>Wikilog</h2>
-                    <div style="text-align: center;">
-                        <img src="https://blog.class4ever.com/wp-content/uploads/2019/04/gh_34fbae86e3c8_258-2.jpg"
-                            alt="qrcode" style="width:100px;margin:0 auto;">
-                    </div>
-                </div>
-
-                <div class="card project">
-                    <div class="card-body">
-                        <h2>Admin UI</h2>
-                        <div class="desc">
-                            Version: 0.1<br>
-                            基于Vue.js和jQuery的后台前端样式
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="/admin_ui/" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
-                    </div>
-                </div>
             </div>
         </div>
 
