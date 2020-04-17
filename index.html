@@ -26,12 +26,16 @@
 
                 <!-- 项目单一卡片 -->
                 <div class="card project" v-for="(v,k) in project">
-                    <div class="card-body">
-                        <h2>{{v.title}}</h2>
-                        <div class="desc">
-                            Version: {{v.ver}}<br>
-                            <span v-html="v.desc"></span>
-                        </div>
+                    <div class="card-body" style="color:#333;">
+
+                        <!-- 项目名 -->
+                        <h2 style="color:#000;">{{v.title}}</h2>
+
+                        <!-- 版本 -->
+                        <div>Version: {{v.ver}}</div>
+                        
+                        <!-- 描述 -->
+                        <div v-html="v.desc"></div>
                     </div>
                     <div class="card-footer" v-if="v.uri">
                         <a :href="v.uri" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
