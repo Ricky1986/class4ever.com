@@ -1,10 +1,19 @@
+//取得frame
+function getFrame(uri) {
+    return `<iframe src="${uri}" class="main-frame"></iframe>`
+}
+
+
 //解析路由
 var routes = []
 for (let k in site.menu) {
     let v = site.menu[k]
-    let html = `<iframe src="${v.uri}" class="main-frame"></iframe>`
-    routes[k] = { path: `/${v.path}`, component: { template: html } }
+    routes[k] = { path: `/${v.path}`, component: { template: getFrame(v.uri) } }
 }
+//设置404页面
+const notFound = { path: `*`, component: { template: getFrame('404.html') } }
+routes.push(notFound)
+
 const router = new VueRouter({
     routes
 })

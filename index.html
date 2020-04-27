@@ -39,6 +39,7 @@
                     </div>
                     <div class="card-footer" v-if="v.uri">
                         <a :href="v.uri" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
+                        <a :href="v.blog" v-if="v.blog" class="layui-btn layui-btn-primary layui-btn-xs">更新日志</a>
                     </div>
                 </div>
                 <!-- /项目单一卡片 -->
