@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- 左侧菜单 -->
+        <div class="side-bar" v-cloak>
+            <!-- 网站标题 -->
+            <div class="site-title">
+                {{siteName}}
+            </div>
+            <!-- 网站菜单 -->
+            <div v-for="(v,k) in menu" @click="goto(k)" :class="'/' + v.path == $route.path ? 'menu-active' : 'menu'">
+                <div>
+                    {{v.title}}
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧内容 -->
+        <div style="width:100%;">
+            <!-- 路由出口 -->
+            <router-view></router-view>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="https://unpkg.com/vue-router@3.1.6/dist/vue-router.min.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+</html>

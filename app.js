@@ -36,6 +36,8 @@ function main() {
     setInterval(function () {
         app.time = new Date()
     }, 100);
+
+    //
 }
 
 //激活主程序
