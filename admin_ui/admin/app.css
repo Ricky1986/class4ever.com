@@ -18,24 +18,25 @@ html, body, #app {
 
 .side-bar {
     background: #000;
-    width: 200px;
+    width: 250px;
     height: 100%;
     color: #fff;
+    overflow: auto;
 }
 
 .site-title {
     font-size: 12px;
     background: #262626;
-    height: 70px;
-    line-height: 70px;
+    height: 60px;
+    line-height: 60px;
     font-size: 16px;
     font-weight: 900;
     text-align: center;
 }
 
 .menu, .menu-active {
-    height: 50px;
-    line-height: 50px;
+    height: 49px;
+    line-height: 49px;
     padding: 0 0 0 40px;
 }
 
@@ -50,4 +51,10 @@ html, body, #app {
 
 .menu-active {
     background: #30a5ff;
+}
+
+.main-frame {
+    height: 100%;
+    width: 100%;
+    border: 0;
 }
