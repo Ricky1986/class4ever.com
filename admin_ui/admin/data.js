@@ -3,6 +3,7 @@
 // 在此文件中设置网站标题, 和左侧菜单
 const site = {
     title: 'Class4ever Admin UI',
+    // title: '网站后台',
     menu: [
         {
             path: '',
@@ -12,7 +13,23 @@ const site = {
         {
             path: 'sogou',
             title: '搜狗',
-            uri: 'https://www.sogou.com'
+            children: [
+                {
+                    path: '3601',
+                    title: '360搜索',
+                    uri: 'https://www.so.com'
+                },
+                {
+                    path: 'itellu1',
+                    title: 'MSDN,我告诉你',
+                    uri: 'https://msdn.itellyou.cn/'
+                },
+                {
+                    path: 'bt1',
+                    title: '宝塔面板',
+                    uri: 'https://www.bt.cn'
+                },
+            ]
         },
         {
             path: '360',
@@ -76,11 +93,6 @@ const site = {
         },
         {
             path: 'csdn8',
-            title: 'CSDN',
-            uri: 'https://www.csdn.net'
-        },
-        {
-            path: 'csdn9',
             title: 'CSDN',
             uri: 'https://www.csdn.net'
         },

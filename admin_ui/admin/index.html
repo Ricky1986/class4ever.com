@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//static.class4ever.com/layui/v2.5.5/css/layui.css">
     <link rel="stylesheet" href="app.css">
 </head>
 
@@ -15,12 +16,46 @@
             <div class="site-title">
                 {{siteName}}
             </div>
-            <!-- 网站菜单 -->
-            <div v-for="(v,k) in menu" @click="goto(k)" :class="'/' + v.path == $route.path ? 'menu-active' : 'menu'">
-                <div>
-                    {{v.title}}
-                </div>
+            <!-- 管理员控制 -->
+            <div class="admin-line">
+                <!-- 显示按钮 -->
+                <template v-if="adminBar==true">
+                    <div class="admin-control" @click="adminBar=false">
+                        <i class="layui-icon layui-icon-up" style="font-size: 10px;"></i>
+                    </div>
+                    <div style="padding:5px 0;">
+                        <button class="layui-btn layui-btn-sm">管理员密码</button>
+                        <button @click="logOut" class="layui-btn layui-btn-danger layui-btn-sm">退出</button>
+                    </div>
+                </template>
+                <!-- 隐藏按钮 -->
+                <template v-else>
+                    <div class="admin-control" @click="adminBar=true">
+                        <i class="layui-icon layui-icon-down" style="font-size: 10px;"></i>
+                    </div>
+                </template>
             </div>
+            <!-- 网站菜单 -->
+            <template v-for="(v,k) in menu">
+                <!-- 一级菜单 -->
+                <div @click="goto(k)" :class="'/' + v.path == $route.path ? 'menu-active' : 'menu'">
+                    <div>
+                        {{v.title}}
+                        <!-- 有下级菜单的情况 -->
+                        <span v-if="v.children!=undefined" style="float:right;padding-right:15px;">
+                            <i class="layui-icon layui-icon-down" style="font-size: 10px; "></i>
+                        </span>
+                    </div>
+                </div>
+                <!-- 二级菜单 -->
+                <div @click="goto(kk)" v-if="v.children!=undefined" v-for="(vv,kk) in v.children"
+                    :class="'/' + vv.path == $route.path ? 'menu-sub-active' : 'menu-sub'">
+                    <div>
+                        {{vv.title}}
+                    </div>
+                </div>
+
+            </template>
         </div>
 
         <!-- 右侧内容 -->
@@ -32,6 +67,7 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 <script src="https://unpkg.com/vue-router@3.1.6/dist/vue-router.min.js"></script>
+<script src="//static.class4ever.com/layui/v2.5.5/layui.all.js"></script>
 <script src="data.js"></script>
 <script src="app.js"></script>
 
