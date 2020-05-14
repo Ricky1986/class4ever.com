@@ -3,6 +3,8 @@ const app = new Vue({
     el: '#app',
     data: {
         time: 0,
+        ts: '',
+        timestamp: '',
         siteTitle: 'Class4ever Pages',
         project: [
             {
@@ -31,6 +33,19 @@ const app = new Vue({
     },
     mounted: function () {//启动
         document.title = this.siteTitle
+    },
+    computed: {
+        time2: function () {
+            console.log(is_int(this.ts))
+            if (str_is_int(this.ts)) {
+                let a = datetime(this.ts)
+                // let b=datetime(a)
+                return `${a.Y}年${a.m}月${a.d}日 ${a.H}:${a.i}:${a.s}`
+            }
+            // return this.ts
+
+
+        }
     }
 })
 
@@ -39,10 +54,36 @@ function main() {
     //刷新时间
     setInterval(function () {
         app.time = new Date()
+        app.timestamp = parseInt(app.time.getTime() / 1000)
     }, 100);
 
     //
 }
 
+/**时间戳转时间 */
+function datetime(timestamp) {
+    let date = new Date(timestamp * 1000); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    return obj = {
+        Y: date.getFullYear(),
+        m: date.getMonth() + 1,
+        d: date.getDate(),
+        H: date.getHours(),
+        i: date.getMinutes(),
+        s: date.getSeconds()
+    }
+}
+
+function is_int(obj) {
+    return Math.round(obj) === obj
+}
+
+function str_is_int(str) {
+    return /^\d+$/.test(str)
+}
+// console.log('ddd')
+// console.log(str_is_int('123d'))
+
 //激活主程序
 main()
+
+new ClipboardJS('.btn-copy');

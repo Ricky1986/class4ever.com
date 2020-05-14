@@ -19,6 +19,30 @@
             <h2>{{siteTitle}}</h2>
         </div>
 
+        
+        <!-- unix时间 -->
+        <div class="card">
+            <div class="card-title">
+                Unix时间戳
+            </div>
+            <div class="card-body">
+                <p>
+                    当前的Unix时间戳是:
+                    <input id="ts" type="text" v-model="timestamp">
+                    <button class="btn-copy layui-btn layui-btn-primary layui-btn-xs" data-clipboard-target="#ts" onclick="layer.msg('已复制')">
+                        复制
+                    </button>
+                </p>
+                <p>
+                    时间戳转北京时间:
+                    <input type="text" placeholder="时间戳" v-model="ts">
+                    可转为
+                    <span>{{time2}}</span>
+                </p>
+
+            </div>
+        </div>
+
         <!-- 项目 -->
         <div class="card">
             <div class="card-title">项目</div>
@@ -47,6 +71,7 @@
             </div>
         </div>
 
+
         <!-- 涂鸦 -->
         <div class="card">
             <div class="card-title">
@@ -61,12 +86,11 @@
                 <br>
                 {{time}}
                 <br>
-                123, 321, lululalalei
             </div>
         </div>
 
         <!-- 内容 -->
-        <div class="card">
+        <div class="card" style="display:none;">
             <div class="card-body">
                 <div>
                     前端: HTML5, CSS, JavaScript, Vue.js, 微信小程序, 微信小游戏, Kotlin, Swift, React, Angular
@@ -85,6 +109,7 @@
 <script src="//static.class4ever.com/jquery/jquery-3.4.1.min.js"></script>
 <script src="//static.class4ever.com/layui/v2.5.5/layui.all.js"></script>
 <script src="//static.class4ever.com/vuejs/v2.6.10/vue.min.js"></script>
+<script src="//static.class4ever.com/clipboard.js/v2.0.4/clipboard.min.js"></script>
 <script src="app.js"></script>
 
 </html>
