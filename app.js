@@ -2,7 +2,7 @@
 const app = new Vue({
     el: '#app',
     data: {
-        time: 0,
+        time: '',
         ts: '',
         timestamp: '',
         siteTitle: 'Class4ever Pages',

@@ -19,7 +19,7 @@
             <h2>{{siteTitle}}</h2>
         </div>
 
-        
+
         <!-- unix时间 -->
         <div class="card">
             <div class="card-title">
@@ -29,7 +29,8 @@
                 <p>
                     当前的Unix时间戳是:
                     <input id="ts" type="text" v-model="timestamp">
-                    <button class="btn-copy layui-btn layui-btn-primary layui-btn-xs" data-clipboard-target="#ts" onclick="layer.msg('已复制')">
+                    <button class="btn-copy layui-btn layui-btn-primary layui-btn-xs" data-clipboard-target="#ts"
+                        onclick="layer.msg('已复制',{icon:6})">
                         复制
                     </button>
                 </p>
@@ -50,10 +51,10 @@
 
                 <!-- 项目单一卡片 -->
                 <div class="card project" v-for="(v,k) in project">
-                    <div class="card-body" style="color:#333;">
+                    <div class="card-body">
 
                         <!-- 项目名 -->
-                        <h2 style="color:#000;">{{v.title}}</h2>
+                        <h2>{{v.title}}</h2>
 
                         <!-- 版本 -->
                         <div>Version: {{v.ver}}</div>
