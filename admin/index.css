@@ -18,7 +18,8 @@ html, body, #app {
 
 .side-bar {
     background: #35363a;
-    width: 250px;
+    width: 210px;
+    min-width:210px;
     height: 100%;
     color: #fff;
     overflow: auto;
