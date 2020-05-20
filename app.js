@@ -24,7 +24,7 @@ const app = new Vue({
             },
             {
                 title: 'Admin UI',
-                ver: '0.2',
+                ver: '0.2.1',
                 uri: '/admin_ui/',
                 desc: '基于Vue.js和jQuery的后台前端样式',
                 blog: '//blog.class4ever.com/2352.html'
