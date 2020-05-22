@@ -1,3 +1,5 @@
+/* 基本样式 */
+
 * {
     margin: 0;
     padding: 0;
@@ -16,34 +18,37 @@ html, body, #app {
     display: none;
 }
 
+/* 左侧栏 */
+
 .side-bar {
     background: #35363a;
     width: 210px;
-    min-width:210px;
+    min-width: 210px;
     height: 100%;
     color: #fff;
     overflow: auto;
 }
+
+/* 站点标题 */
 
 .site-title {
     font-size: 19px;
     background: #000;
     height: 20px;
     padding: 15px 0 5px;
-    /* line-height: 60px; */
     text-align: center;
-    /* border:1px solid red; */
 }
 
-.menu, .menu-active {
+/* 菜单: 样式 */
+
+.menu, .menu-active, .menu-sub {
     height: 49px;
     line-height: 49px;
     padding: 1px 1px 1px 41px;
-}
-
-.menu {
     color: #fff;
 }
+
+/* 菜单: hover态 */
 
 .menu:hover, .menu-sub:hover {
     background: #1f1f1f;
@@ -52,16 +57,19 @@ html, body, #app {
     padding: 0 0 0 40px;
 }
 
+/* 菜单: 2级菜单颜色 */
+
 .menu-sub {
-    height: 49px;
-    line-height: 49px;
-    padding: 1px 1px 1px 41px;
     background: #1f1f1f;
 }
+
+/* 菜单: 选中状态 */
 
 .menu-active {
     background: #30a5ff;
 }
+
+/* iframe样式 */
 
 .main-frame {
     height: 100%;
@@ -69,10 +77,14 @@ html, body, #app {
     border: 0;
 }
 
+/* 显示管理员控制按钮 */
+
 .admin-control {
     line-height: 25px;
-    border:1px solid #000;
+    border: 1px solid #000;
 }
+
+/* 显示管理员控制按钮:hover态 */
 
 .admin-control:hover {
     cursor: pointer;
@@ -80,8 +92,31 @@ html, body, #app {
     border: 1px dashed #fff;
 }
 
+/* 管理员控制栏 */
+
 .admin-line {
     text-align: center;
     background: #000;
     padding-bottom: 5px;
+}
+
+/* 菜单中的向下箭头的位置 */
+
+.sub-tip {
+    float: right;
+    padding-right: 15px;
+}
+
+/* 向下箭头大小 */
+
+.sub-tip>i, .admin-control>i {
+    font-size: 10px;
+}
+
+/* shake按钮 */
+
+.btn-shake {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
 }

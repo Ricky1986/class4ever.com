@@ -1,0 +1,86 @@
+<!-- 数据和配置文件, 可更改为接口提供 -->
+<script src="data.js"></script>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="//static.class4ever.com/layui/v2.5.5/css/layui.css">
+    <!-- 样式 -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Sidebar -->
+        <div class="side-bar" v-cloak>
+
+            <!-- 网站标题 -->
+            <div class="site-title">
+                {{site.title}}
+            </div>
+
+            <!-- 管理员控制 -->
+            <div class="admin-line">
+                <!-- 箭头 -->
+                <div class="admin-control" @click="showAdminBar=!showAdminBar">
+                    <i class="layui-icon" :class="showAdminBar == true ? 'layui-icon-up' : 'layui-icon-down'"></i>
+                </div>
+
+                <!-- 按钮 -->
+                <div v-if="showAdminBar==true" style="padding:5px 0;font-size:0;">
+                    <button @click="if($route.path!='/edit_pwd') $router.push('edit_pwd')"
+                        class="layui-btn layui-btn-sm">管理员密码</button>
+                    <button @click="logOut" class="layui-btn layui-btn-danger layui-btn-sm">退出</button>
+                </div>
+            </div>
+
+            <!-- 菜单 -->
+            <template v-for="(v,k) in site.menu">
+                <!-- 一级菜单 -->
+                <div @click="goto(v.path)" :class="v.path == $route.path ? 'menu-active' : 'menu'"
+                    onselectstart="return false">
+                    <div>
+                        {{v.title}}
+                        <!-- 向下箭头 -->
+                        <span v-if="routeTable[v.path].hasChild" class="sub-tip">
+                            <i class="layui-icon" :class="pathOpen == v.path ? 'layui-icon-up' : 'layui-icon-down'"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 二级菜单 -->
+                <template v-if="routeTable[v.path].hasChild && pathOpen==v.path" v-for="(vv,kk) in v.children">
+                    <div @click="goto(vv.path)" :class="vv.path == $route.path ? 'menu-active' : 'menu-sub'"
+                        onselectstart="return false">
+                        <div>
+                            {{vv.title}}
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <!-- shake按钮 -->
+            <div>
+                <button @click="shake" class="btn-shake layui-btn layui-btn-sm">Shake</button>
+            </div>
+        </div>
+
+        <!-- 路由出口 -->
+        <div style="width:100%;">
+            <router-view></router-view>
+        </div>
+    </div>
+
+</body>
+
+<!-- 库 -->
+<script src="//cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script src="//unpkg.com/vue-router@3.1.6/dist/vue-router.min.js"></script>
+<script src="//static.class4ever.com/layui/v2.5.5/layui.all.js"></script>
+<!-- 主程序 -->
+<script src="index.js"></script>
+
+</html>

@@ -9,12 +9,20 @@
         #app>div {
             text-align: center;
         }
+
+        html{
+            background:#000;
+        }
+        canvas{
+            padding:5px;
+            background:#fff;
+        }
     </style>
 </head>
 
 <body>
     <div id="app" style="padding:30px;">
-        <div style="font-size:30px;color:#999;">输入文字转二维码</div>
+        <div style="font-size:30px;color:#eee;">输入文字转二维码</div>
         <div style="padding:30px 0;">
             <textarea @keyup="update" v-model="word" style="width:100%;font-size:30px;"></textarea>
         </div>
@@ -32,8 +40,8 @@
             //更新二维码
             update: function () {
                 let obj = document.getElementById('qrcode')
-                let canvas = qrcanvas.qrcanvas({ data: this.word })
                 obj.innerHTML = ''
+                let canvas = qrcanvas.qrcanvas({ data: this.word })
                 if (this.word) obj.appendChild(canvas);
             }
         },

@@ -19,11 +19,20 @@
     color: #999;
 }
 
-body{
-    background:#000;
+body {
+    background: #000;
     /* color:#fff; */
 }
 
-#app{
-    color:#fff;
+#app {
+    color: #fff;
+}
+
+a {
+    color: #fff;
+}
+
+.tool a {
+    display: inline-block;
+    margin:5px 10px;
 }

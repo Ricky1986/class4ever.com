@@ -19,31 +19,6 @@
             <h2>{{siteTitle}}</h2>
         </div>
 
-
-        <!-- unix时间 -->
-        <div class="card">
-            <div class="card-title">
-                Unix时间戳
-            </div>
-            <div class="card-body">
-                <p>
-                    当前的Unix时间戳是:
-                    <input id="ts" type="text" v-model="timestamp">
-                    <button class="btn-copy layui-btn layui-btn-primary layui-btn-xs" data-clipboard-target="#ts"
-                        onclick="layer.msg('已复制',{icon:6})">
-                        复制
-                    </button>
-                </p>
-                <p>
-                    时间戳转北京时间:
-                    <input type="text" placeholder="时间戳" v-model="ts">
-                    可转为
-                    <span>{{time2}}</span>
-                </p>
-
-            </div>
-        </div>
-
         <!-- 项目 -->
         <div class="card">
             <div class="card-title">项目</div>
@@ -72,6 +47,40 @@
             </div>
         </div>
 
+        <!-- unix时间 -->
+        <div class="card">
+            <div class="card-title">
+                Unix时间戳
+            </div>
+            <div class="card-body">
+                <p>
+                    当前的Unix时间戳是:
+                    <input id="ts" type="text" v-model="timestamp">
+                    <button class="btn-copy layui-btn layui-btn-primary layui-btn-xs" data-clipboard-target="#ts"
+                        onclick="layer.msg('已复制',{icon:6})">
+                        复制
+                    </button>
+                </p>
+                <p>
+                    时间戳转北京时间:
+                    <input type="text" placeholder="时间戳" v-model="ts">
+                    可转为
+                    <span>{{time2}}</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- 常用工具 -->
+        <div class="card">
+            <div class="card-title">
+                常用工具
+            </div>
+            <div class="card-body tool">
+                <a href="//whois.chinaz.com">Whois查询</a>
+                <a href="//icp.chinaz.com">ICP查询</a>
+                <a href="/qrcode.html">二维码</a>
+            </div>
+        </div>
 
         <!-- 涂鸦 -->
         <div class="card">
