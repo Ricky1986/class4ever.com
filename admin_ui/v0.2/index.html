@@ -30,7 +30,7 @@
                 </div>
 
                 <!-- 按钮 -->
-                <div v-if="showAdminBar==true" style="padding:5px 0;font-size:0;">
+                <div v-show="showAdminBar == true" style="padding:5px 0;font-size:0;">
                     <button @click="if($route.path!='/edit_pwd') $router.push('edit_pwd')"
                         class="layui-btn layui-btn-sm">管理员密码</button>
                     <button @click="logOut" class="layui-btn layui-btn-danger layui-btn-sm">退出</button>
@@ -44,6 +44,12 @@
                     onselectstart="return false">
                     <div>
                         {{v.title}}
+
+                        <!-- 是否是外链 -->
+                        <span v-if="routeTable[v.path].isOuter">
+                            <i class="layui-icon layui-icon-layer ourter-link"></i>
+                        </span>
+
                         <!-- 向下箭头 -->
                         <span v-if="routeTable[v.path].hasChild" class="sub-tip">
                             <i class="layui-icon" :class="pathOpen == v.path ? 'layui-icon-up' : 'layui-icon-down'"></i>
@@ -52,11 +58,16 @@
                 </div>
 
                 <!-- 二级菜单 -->
-                <template v-if="routeTable[v.path].hasChild && pathOpen==v.path" v-for="(vv,kk) in v.children">
+                <template v-if="routeTable[v.path].hasChild && pathOpen == v.path" v-for="(vv,kk) in v.children">
                     <div @click="goto(vv.path)" :class="vv.path == $route.path ? 'menu-active' : 'menu-sub'"
                         onselectstart="return false">
                         <div>
                             {{vv.title}}
+
+                            <!-- 是否是外链 -->
+                            <span v-if="routeTable[vv.path].isOuter">
+                                <i class="layui-icon layui-icon-layer ourter-link"></i>
+                            </span>
                         </div>
                     </div>
                 </template>

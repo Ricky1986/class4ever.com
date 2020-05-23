@@ -24,23 +24,9 @@ function prepare() {
         routes.push(node)
 
         //构建路由表元素-1级的
-        let nodeOfTable = {
-            //这个1级菜单是否有小孩?
-            hasChild: v.children != undefined && v.children.length,
-            //1级菜单没有父级
-            parent: false,
-            //是否为外链
-            isOuter: v.is_ourter
-        }
+        let nodeOfTable = {}
 
-        //是外链则同时记录链接
-        if (v.is_ourter) nodeOfTable.uri = v.uri
-
-        //加入路由表
-        routeTable[v.path] = nodeOfTable
-
-        //这个1级有小孩, 就继续解析它的孩子
-        if (nodeOfTable.hasChild) {
+        if (v.children != undefined && v.children.length) {
             for (let kk in v.children) {
                 // 解析二级菜单
                 let vv = v.children[kk]
@@ -48,23 +34,39 @@ function prepare() {
                 routes.push(node)
 
                 //构建路由表元素-2级的
-                let nodeOfTable2 = {
-                    hasChild: false,
-                    parent: v.path,
-                    isOuter: vv.is_ourter
-                }
+                let nodeOfTable2 = {}
+                nodeOfTable2.hasChild = false//2级菜单没有小孩
+                nodeOfTable2.parent = v.path
 
                 //是外链则同时记录链接
-                if (vv.is_ourter) nodeOfTable2.uri = vv.uri
+                if (vv.is_ourter) {
+                    nodeOfTable2.isOuter = true
+                    nodeOfTable2.uri = vv.uri
+                } else nodeOfTable2.isOuter = false
 
                 //加入路由表
                 routeTable[vv.path] = nodeOfTable2
             }
-        }
+
+            //1级菜单是否有小孩
+            nodeOfTable.hasChild = true
+        } else nodeOfTable.hasChild = false
+
+        //1级节点没有父级
+        nodeOfTable.parent = false
+
+        //是外链则同时记录链接
+        if (v.is_ourter) {
+            nodeOfTable.isOuter = true
+            nodeOfTable.uri = v.uri
+        } else nodeOfTable.isOuter = false
+
+        //加入路由表
+        routeTable[v.path] = nodeOfTable
     }
 
     // 建立vue路由器
-    router = new VueRouter({ routes: routes })
+    router = new VueRouter({ routes })
 }
 
 
@@ -129,14 +131,14 @@ function runVue() {
             }
         },
 
-        router: router
+        router
     }).$mount('#app')
 }
 
 
 /**取得iframe */
 function getFrame(uri) {
-    return '<iframe src="' + uri + '" class="main-frame"></iframe>'
+    return `<iframe src="${uri}" class="main-frame"></iframe>`
 }
 
 

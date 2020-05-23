@@ -7,7 +7,10 @@ const site = {
     config: {
         default_path: '/home',
         log_out_action: './login',
-        edit_pwd_action: './page/edit_pwd.html'
+        edit_pwd_action: './page/edit_pwd.html',
+        title_size: 0,
+        menu_font_size: 0,
+        sidebar_width: 0,
     },
     menu: [
         {
@@ -22,12 +25,19 @@ const site = {
                 {
                     path: '/toutiao',
                     title: '今日头条',
-                    uri: 'https://www.toutiao.com/'
+                    uri: 'https://www.toutiao.com/',
+                    is_ourter: true
                 },
                 {
                     path: '/csdn',
                     title: 'CSDN',
                     uri: 'https://www.csdn.net'
+                },
+                {
+                    path: '/v2ex',
+                    title: 'V2EX',
+                    uri: 'https://www.v2ex.com/',
+                    is_ourter: true
                 },
             ]
         },

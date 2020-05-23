@@ -67,6 +67,8 @@ html, body, #app {
 
 .menu-active {
     background: #30a5ff;
+    /* background: #1e9fff; */
+    /* background: #009688; */
 }
 
 /* iframe样式 */
@@ -119,4 +121,11 @@ html, body, #app {
     float: right;
     margin-right: 10px;
     margin-top: 10px;
+}
+
+/* 外链示意 */
+
+.ourter-link {
+    font-size: 10px;
+    margin-left: 3px;
 }
