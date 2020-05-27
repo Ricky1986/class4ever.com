@@ -15,15 +15,7 @@ const app = new Vue({
                 blog: ''
             },
             {
-                title: 'Wikilog',
-                ver: '1.0.5',
-                uri: '',
-                desc: '<img src="https://blog.class4ever.com/wp-content/uploads/2019/04/gh_34fbae86e3c8_258-2.jpg"  alt="qrcode" style="width:100px;margin:0 auto;">',
-                blog: ''
-
-            },
-            {
-                title: 'Class4ever Admin UI',
+                title: 'Admin UI',
                 ver: '0.2.2',
                 uri: '/admin_ui/',
                 desc: '基于Vue.js的后台前端样式',

@@ -46,7 +46,7 @@
                         {{v.title}}
 
                         <!-- 是否是外链 -->
-                        <span v-if="routeTable[v.path].isOuter">
+                        <span v-if="routeTable[v.path].outerLink">
                             <i class="layui-icon layui-icon-layer ourter-link"></i>
                         </span>
 
@@ -65,7 +65,7 @@
                             {{vv.title}}
 
                             <!-- 是否是外链 -->
-                            <span v-if="routeTable[vv.path].isOuter">
+                            <span v-if="routeTable[vv.path].outerLink">
                                 <i class="layui-icon layui-icon-layer ourter-link"></i>
                             </span>
                         </div>
@@ -74,7 +74,7 @@
             </template>
 
             <!-- shake按钮 -->
-            <div>
+            <div v-if="!oneLevel">
                 <button @click="shake" class="btn-shake layui-btn layui-btn-sm">Shake</button>
             </div>
         </div>

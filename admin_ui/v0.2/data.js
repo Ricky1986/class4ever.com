@@ -26,7 +26,7 @@ const site = {
                     path: '/toutiao',
                     title: '今日头条',
                     uri: 'https://www.toutiao.com/',
-                    is_ourter: true
+                    is_outer: true
                 },
                 {
                     path: '/csdn',
@@ -37,7 +37,7 @@ const site = {
                     path: '/v2ex',
                     title: 'V2EX',
                     uri: 'https://www.v2ex.com/',
-                    is_ourter: true
+                    is_outer: true
                 },
             ]
         },

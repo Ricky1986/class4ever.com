@@ -2,8 +2,6 @@
 function prepare() {
     //vue使用的routes
     var routes = []
-    //初始化路由表
-    routeTable = []
 
     //复制菜单为路由
     let _route = JSON.parse(JSON.stringify(site.menu))
@@ -29,18 +27,16 @@ function prepare() {
             hasChild: v.children != undefined && v.children.length,
             //1级菜单没有父级
             parent: false,
-            //是否为外链
-            isOuter: v.is_ourter
+            //是外链则同时记录链接
+            outerLink: v.is_outer ? uri : false
         }
-
-        //是外链则同时记录链接
-        if (v.is_ourter) nodeOfTable.uri = v.uri
 
         //加入路由表
         routeTable[v.path] = nodeOfTable
 
         //这个1级有小孩, 就继续解析它的孩子
         if (nodeOfTable.hasChild) {
+            oneLevel = false
             for (let kk in v.children) {
                 // 解析二级菜单
                 let vv = v.children[kk]
@@ -51,11 +47,8 @@ function prepare() {
                 let nodeOfTable2 = {
                     hasChild: false,
                     parent: v.path,
-                    isOuter: vv.is_ourter
+                    outerLink: vv.is_outer ? vv.uri : false
                 }
-
-                //是外链则同时记录链接
-                if (vv.is_ourter) nodeOfTable2.uri = vv.uri
 
                 //加入路由表
                 routeTable[vv.path] = nodeOfTable2
@@ -93,10 +86,11 @@ function runVue() {
             /**跳转或者打开菜单 */
             goto: function (path) {
                 let _node = routeTable[path]
+                let _ol = _node.outerLink
 
                 //是外链则弹出
-                if (_node.isOuter)
-                    window.open(_node.uri)
+                if (_ol)
+                    window.open(_ol)
 
                 //有小孩的打开自己
                 else if (_node.hasChild)
@@ -143,7 +137,8 @@ function getFrame(uri) {
 /**开始 */
 var router, //路由器
     app,//vue程序
-    routeTable //路由表
+    routeTable = [], //路由表
+    oneLevel = true
 
 //启动预备进程
 prepare()
