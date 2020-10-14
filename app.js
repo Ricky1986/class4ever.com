@@ -5,7 +5,7 @@ const app = new Vue({
         time: '',
         ts: '',
         timestamp: '',
-        siteTitle: 'Class4ever 开源',
+        siteTitle: 'Class4ever 开源社区',
         project: [
             {
                 title: 'Slashmark',
