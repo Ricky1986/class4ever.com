@@ -45,8 +45,6 @@
             padding-left: 20px;
         }
 
-
-
         .link a {
             text-decoration: underline;
             display: inline-block;
@@ -96,12 +94,17 @@
         .go-to-top:hover {
             cursor: pointer;
         }
+
+        [v-cloak] {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <aside id="left">
+
+        <aside id="left" v-cloak>
             <!-- logo -->
             <div class="layui-card">
                 <div class="layui-card-body logo">Class4ever 开源社区</div>
@@ -125,7 +128,7 @@
 
         </aside>
 
-        <main>
+        <main v-cloak>
 
             <div class="layui-card">
                 <div class="layui-card-body" style="font-size:22px;">
@@ -170,7 +173,7 @@
 
         </main>
 
-        <aside id="right" style="width:300px;">
+        <aside id="right" style="width:300px;" v-cloak>
 
             <div class="layui-card">
                 <div class="layui-card-header">友情链接</div>
