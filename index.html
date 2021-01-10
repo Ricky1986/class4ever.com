@@ -113,7 +113,7 @@
 
             <!-- 导航 -->
             <div class="layui-card">
-                <div class="layui-card-body filter" style="font-size:0 !important;padding:10px 15px;">
+                <div class="layui-card-body filter" style="font-size:0 !important;padding:10px 12px;">
                     <button @click="set_type('all')" class="layui-btn layui-btn-sm layui-btn-warm">全部</button>
                     <button @click="set_type('blog')" class="layui-btn layui-btn-sm layui-btn-normal">博客</button>
                     <button @click="set_type('christian')" class="layui-btn layui-btn-sm">基督徒公众号</button>
@@ -140,10 +140,10 @@
                 <div class="layui-card-body" style="padding:0;">
                     <div style="padding:6px 15px;font-size:18px;border-bottom:1px solid #eee;line-height:30px;">
                         <template v-if="v.uri">
-                            <a :href="v.uri" target="_blank" v-html="nl2br(v.title)"></a>
+                            <a :href="v.uri" target="_blank" v-html="nl2br(v.title)" style="color:#000;"></a>
                         </template>
                         <template v-else>
-                            <span v-html="nl2br(v.title)"></span>
+                            <span v-html="nl2br(v.title)" style="font-size:15px;"></span>
                         </template>
                     </div>
                     <div style="padding:5px 10px;">
