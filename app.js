@@ -103,8 +103,6 @@ const app = new Vue({
                 type: this.type_current,
                 page: this.page_current
             }, function (res) {
-                res = JSON.parse(res)
-                // console.log(res)
                 if (res.code === 200) {
                     app.list = app.list.concat(res.data.list)
                     if (res.data.list.length < res.data.page_size)
