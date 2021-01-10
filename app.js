@@ -28,7 +28,7 @@ const app = new Vue({
     },
     computed: {
         time2: function () {
-            console.log(is_int(this.ts))
+            // console.log(is_int(this.ts))
             if (str_is_int(this.ts)) {
                 let a = datetime(this.ts)
                 // let b=datetime(a)

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body></body>
+<script>
+    //iframe接收消息，并把当前颜色发送给主页面  
+    window.addEventListener('message', function (e) {
+        if (e.source != window.parent)
+            return;
+
+        localStorage.setItem('username', e.data.username);
+        localStorage.setItem('token', e.data.token);
+
+        let res = {
+            code: 200,
+            message: 'success',
+            data: {
+                domain_key: e.data.domain_key
+            }
+        }
+
+        window.parent.postMessage(res, '*');
+    }, false);
+</script>
+
+</html>

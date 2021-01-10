@@ -1,130 +1,456 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class4ever 开源社区</title>
     <link rel="stylesheet" href="//static.class4ever.com/layui/v2.5.5/css/layui.css">
-    <link rel="stylesheet" href="/cardview.css">
-    <link rel="stylesheet" href="app.css">
-    <base target="_blank">
+    <style>
+        body {
+            background: #999;
+            padding: 20px 40px;
+        }
+
+        .filter button {
+            display: block;
+            margin-left: 0 !important;
+            margin-bottom: 10px;
+        }
+
+        .layui-btn-sm {
+            font-size: 14px;
+        }
+
+        .layui-btn-warm {
+            color: #000;
+        }
+
+        #app {
+            display: flex;
+        }
+
+        nav {
+            background: #000;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            z-index: 999;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-left: 20px;
+        }
+
+
+
+        .link a {
+            text-decoration: underline;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .more {
+            height: 50px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        aside#left {
+            width: 160px;
+            margin-right: 20px;
+            position: fixed;
+        }
+
+        .logo {
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        main {
+            width: 590px;
+            margin-bottom: 30px;
+            margin-right: 20px;
+            margin-left: 180px;
+        }
+
+        .go-to-top {
+            position: fixed;
+            z-index: 99999;
+            bottom: 10px;
+            right: 10px;
+            width: 80px;
+            height: 60px;
+            background: rgba(255, 255, 255, .2);
+            display: none;
+            border-radius: 5px;
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .go-to-top:hover {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- 主页面 -->
-    <div id="app" v-cloak style="width:800px;padding:20px;">
+    <div id="app">
+        <aside id="left">
+            <!-- logo -->
+            <div class="layui-card">
+                <div class="layui-card-body logo">Class4ever 开源社区</div>
+            </div>
+            <!-- /logo -->
 
-        <!-- 页面标题 -->
-        <div class="card card-single">
-            <h2>{{siteTitle}}</h2>
-        </div>
+            <!-- 导航 -->
+            <div class="layui-card">
+                <div class="layui-card-body filter" style="font-size:0 !important;padding:10px 15px;">
+                    <button @click="set_type('all')" class="layui-btn layui-btn-sm layui-btn-warm">全部</button>
+                    <button @click="set_type('blog')" class="layui-btn layui-btn-sm layui-btn-normal">博客</button>
+                    <button @click="set_type('christian')" class="layui-btn layui-btn-sm">基督徒公众号</button>
+                    <button @click="set_type('shuoshuo')" class="layui-btn layui-btn-sm layui-btn-primary">说说</button>
+                    <button @click="set_type('system')" class="layui-btn layui-btn-sm layui-btn-danger"
+                        style="margin-bottom:0;">系统</button>
+                </div>
+            </div>
+            <!-- /导航 -->
 
-        <!-- 项目 -->
-        <div class="card">
-            <div class="card-title">项目</div>
-            <div class="card-body" style="display:flex;padding:20px;flex-flow:row wrap;">
 
-                <!-- 项目单一卡片 -->
-                <div class="card project" v-for="(v,k) in project">
-                    <div class="card-body">
 
-                        <!-- 项目名 -->
-                        <h2>{{v.title}}</h2>
+        </aside>
 
-                        <!-- 版本 -->
-                        <div>Version: {{v.ver}}</div>
+        <main>
 
-                        <!-- 描述 -->
-                        <div v-html="v.desc"></div>
+            <div class="layui-card">
+                <div class="layui-card-body" style="font-size:22px;">
+                    Update Log
+                </div>
+            </div>
+
+            <div v-for="(v,k) in list" class="layui-card">
+                <div class="layui-card-body" style="padding:0;">
+                    <div style="padding:6px 15px;font-size:18px;border-bottom:1px solid #eee;line-height:30px;">
+                        <template v-if="v.uri">
+                            <a :href="v.uri" target="_blank" v-html="nl2br(v.title)"></a>
+                        </template>
+                        <template v-else>
+                            <span v-html="nl2br(v.title)"></span>
+                        </template>
                     </div>
-                    <div class="card-footer" v-if="v.uri">
-                        <a :href="v.uri" class="layui-btn layui-btn-normal layui-btn-xs">访问</a>
-                        <a :href="v.blog" v-if="v.blog" class="layui-btn layui-btn-primary layui-btn-xs">更新日志</a>
+                    <div style="padding:5px 10px;">
+                        <button @click="set_type(get_type(v.site_id).route)" :class="get_type(v.site_id).style"
+                            class="layui-btn layui-btn-sm">{{ get_type(v.site_id).name }}</button>
+                        <span style="font-size:13px;color:#555;margin-left:10px;">
+                            <template v-if="get_type(v.site_id).route === 'christian'">
+                                {{ date('Y-m-d', v.create_at)}}
+                            </template>
+                            <template v-else>
+                                {{ date('Y-m-d H:i:s', v.create_at)}}
+                            </template>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-body more">
+                    <span v-if="is_loading">加载中...</span>
+                    <span v-else-if="is_end">没有更多了</span>
+                    <button @click="more" v-else class="layui-btn layui-btn-primary layui-btn-lg"
+                        style="width:300px;">更多</button>
+                </div>
+            </div>
+
+        </main>
+
+        <aside id="right" style="width:300px;">
+
+            <div class="layui-card">
+                <div class="layui-card-header">友情链接</div>
+                <div class="layui-card-body link">
+                    <a v-for="(v,k) in hotlink" :href="v.uri" target="blank">{{ v.site_name}}</a>
+                </div>
+            </div>
+
+            <!-- 搜索 -->
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <form action="https://blog.class4ever.com/" method="get" target="_blank">
+                        <div>
+                            <input name="s" type="text" class="layui-input">
+                        </div>
+                        <div style="text-align:right;margin-top:10px;">
+                            <button class="layui-btn layui-btn-sm layui-btn-normal">搜博客</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /搜索 -->
+
+            <div class="layui-card">
+                <div class="layui-card-header">工具</div>
+                <div class="layui-card-body">
+                    <a href="https://class4ever.com/qrcode.html" target="blank">文字转二维码</a>
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-header">项目</div>
+                <div class="layui-card-body">
+                    <ul>
+                        <li>
+                            <a href="https://class4ever.com/slashmark/" target="blank">Slashmark</a>
+                        </li>
+                        <li>
+                            <a href="https://class4ever.com/admin_ui/" target="blank">Admin UI</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-header">微信公众号</div>
+                <div class="layui-card-body" style="text-align:center;">
+                    <img src="https://www.class4ever.com/_static/images/wechat_mp.jpg" alt="基督徒" style="width:150px;">
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="fly-panel-main" style="font-size:9px;color:#aaa;line-height:20px;">
+                        <p>
+                            Version: 0.0.1
+                        </p>
+                        <p>
+                            <!--CNZZ统计 开始 -->
+                            <span id='cnzz_stat_icon_1277357197'></span>
+                            <script>
+                                var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+                                var cnzz_s_tag = document.createElement('script');
+                                cnzz_s_tag.type = 'text/javascript';
+                                cnzz_s_tag.async = true;
+                                cnzz_s_tag.charset = 'utf-8';
+                                cnzz_s_tag.src = cnzz_protocol + 's23.cnzz.com/z_stat.php?id=1277357197&online=2';
+                                var root_s = document.getElementsByTagName('script')[0];
+                                root_s.parentNode.insertBefore(cnzz_s_tag, root_s);
+                            </script>
+                            <!--CNZZ统计 结束 -->
+                        </p>
+                        <p>Class4ever也是一个班级通讯录和微信群</p>
+                        <p>信是所望之事的实底, 是未见之事的确据</p>
                     </div>
                 </div>
-                <!-- /项目单一卡片 -->
+        </aside>
 
-            </div>
+        <!-- 回到顶部按钮 -->
+        <div @click="go_to_top" class="go-to-top">
+            <i class="layui-icon layui-icon-up" style="font-size: 40px; color: #1E9FFF;"></i>
         </div>
-
-        <!-- unix时间 -->
-        <div class="card">
-            <div class="card-title">
-                Unix时间戳
-            </div>
-            <div class="card-body">
-                <p>
-                    当前的Unix时间戳是:
-                    <input id="ts" type="text" v-model="timestamp">
-                    <button class="btn-copy layui-btn layui-btn-primary layui-btn-xs" data-clipboard-target="#ts"
-                        onclick="layer.msg('已复制',{icon:6})">
-                        复制
-                    </button>
-                </p>
-                <p>
-                    时间戳转北京时间:
-                    <input type="text" placeholder="时间戳" v-model="ts">
-                    可转为
-                    <span>{{time2}}</span>
-                </p>
-                <p>
-                    <!-- 北京时间转时间戳: -->
-                    <!-- <input type="text" v-model="tm"> -->
-                    <!-- 可 -->
-                </p>
-            </div>
-        </div>
-
-        <!-- 常用工具 -->
-        <div class="card">
-            <div class="card-title">
-                常用工具
-            </div>
-            <div class="card-body tool">
-                <a href="//whois.chinaz.com">Whois查询</a>
-                <a href="//icp.chinaz.com">ICP查询</a>
-                <a href="/qrcode.html">二维码</a>
-            </div>
-        </div>
-
-        <!-- 涂鸦 -->
-        <div class="card">
-            <div class="card-title">
-                涂鸦
-            </div>
-            <div class="card-body">
-                This is my github pages.
-                <br>
-                My name is Ricky C..
-                <br>
-                今天是几号呢?
-                <br>
-                {{time}}
-                <br>
-            </div>
-        </div>
-
-        <!-- 内容 -->
-        <div class="card" style="display:none;">
-            <div class="card-body">
-                <div>
-                    前端: HTML5, CSS, JavaScript, Vue.js, 微信小程序, 微信小游戏, Kotlin, Swift, React, Angular
-                </div>
-                <div>
-                    后端: PHP, Python, Go, Node.js, Ruby, Django, ThinkPHP, Laravel, Java, .NET, MySQL, Redis, MongoDB,
-                    Linux
-                </div>
-                <div>
-                    其他: Git
-                </div>
-            </div>
-        </div>
+        <!-- /回到顶部按钮 -->
     </div>
+
 </body>
-<script src="//static.class4ever.com/jquery/jquery-3.4.1.min.js"></script>
 <script src="//static.class4ever.com/layui/v2.5.5/layui.all.js"></script>
-<script src="//static.class4ever.com/vuejs/v2.6.10/vue.min.js"></script>
-<script src="//static.class4ever.com/clipboard.js/v2.0.4/clipboard.min.js"></script>
-<script src="app.js"></script>
+<script src="//static.class4ever.com/vuejs/v2.6.12/vue.min.js"></script>
+<script>
+    var $ = layui.$
+    const app = new Vue({
+        el: '#app',
+        data: {
+            list: [],
+            type_current: 'all',
+            page_current: 1,
+            is_loading: false,
+            is_end: false,
+            hotlink: [{
+                uri: '//www.v2ex.com',
+                site_name: 'V2EX'
+            },
+            {
+                uri: '//github.com',
+                site_name: 'GitHub'
+            },
+            {
+                uri: '//segmentfault.com/',
+                site_name: 'SegmentFault'
+            },
+            {
+                uri: '//stackoverflow.com/',
+                site_name: 'Stack Overflow'
+            },
+            {
+                uri: '//dev.to/',
+                site_name: 'DEV Community'
+            },
+            {
+                uri: '//www.cnblogs.com/',
+                site_name: '博客园'
+            },
+            {
+                uri: '//www.oschina.net',
+                site_name: 'OSCHINA'
+            },
+            {
+                uri: '//www.toutiao.com',
+                site_name: '今日头条'
+            },
+            {
+                uri: '//www.twle.cn',
+                site_name: '简单教程'
+            },
+            {
+                uri: '//www.36kr.com',
+                site_name: '36氪'
+            },
+            {
+                uri: 'https://gitee.com',
+                site_name: 'Gitee'
+            },
+            {
+                uri: 'https://whois.chinaz.com/',
+                site_name: 'Whois查询'
+            },
+            {
+                uri: 'https://icp.chinaz.com/',
+                site_name: 'ICP查询'
+            },
+            {
+                uri: 'https://blog.class4ever.com/',
+                site_name: '话语的服侍'
+            },
+            {
+                uri: 'https://gitee.com/ricky1986',
+                site_name: 'ricky@Gitee'
+            },
+            {
+                uri: 'https://github.com/ricky1986',
+                site_name: 'ricky@GitHub'
+            },
+
+            ],
+        },
+        mounted: function () {
+            this.get_data()
+
+            this.watch_height()
+
+
+        },
+        methods: {
+            watch_height: function () {
+                //距离顶部大于100时出现到顶部按钮
+                $(window).on('scroll', () => {
+                    var fromTop = $(window).scrollTop(); // 已滚动卷去的高度
+                    let windowHeight = $(window).height(); // 可视窗口的高度
+
+                    if (fromTop > 100)
+                        $('.go-to-top').fadeIn()
+                    else
+                        $('.go-to-top').fadeOut()
+                })
+            },
+
+            /** 搞数据 */
+            get_data: function () {
+                this.is_loading = true
+                let api = 'https://api.class4ever.com/updatelog'
+                $.get(api, {
+                    type: this.type_current,
+                    page: this.page_current
+                }, function (res) {
+                    res = JSON.parse(res)
+                    // console.log(res)
+                    if (res.code === 200) {
+                        app.list = app.list.concat(res.data.list)
+                        if (res.data.list.length < res.data.page_size)
+                            app.is_end = true
+                        app.is_loading = false
+                    }
+                })
+            },
+
+            /**更改分类 */
+            set_type: function (type) {
+                this.type_current = type
+                this.page_current = 1
+                this.list = []
+                this.is_end = false
+                this.get_data()
+                this.go_to_top()
+            },
+
+            /**取得类别 */
+            get_type: function (site_id) {
+                let table = {
+                    1: {
+                        route: 'blog',
+                        name: '博客',
+                        style: 'layui-btn-normal'
+                    },
+                    10: {
+                        route: 'system',
+                        name: '系统',
+                        style: 'layui-btn-danger'
+
+                    },
+                    11: {
+                        route: 'christian',
+                        name: '基督徒公众号',
+                        style: ''
+                    },
+                    12: {
+                        route: 'shuoshuo',
+                        name: '说说',
+                        style: 'layui-btn-primary'
+                    }
+                }
+
+                return table[site_id]
+            },
+
+            /**
+                应用时间格式:
+                   @param format string 如'Y-m-d H:i:s'
+                   @param unixtime int Unix时间戳, 如 1604389233
+
+                   目前只支持关键字Y,m,d,H,i,s
+            */
+            date: function (format, unixtime) {
+                t = new Date(unixtime * 1000)
+                let Y = t.getFullYear()
+                let m = (t.getMonth() + 1) < 10 ? ('0' + (t.getMonth() + 1)) : (t.getMonth() + 1)
+                let d = t.getDate() < 10 ? ('0' + t.getDate()) : t.getDate()
+                let H = t.getHours() < 10 ? '0' + t.getHours() : t.getHours()
+                let i = t.getMinutes() < 10 ? '0' + t.getMinutes() : t.getMinutes()
+                let s = t.getSeconds() < 10 ? '0' + t.getSeconds() : t.getSeconds()
+
+                return format.replace(/Y/g, Y).replace(/m/g, m).replace(/d/g, d).replace(/H/g, H).replace(/i/g, i).replace(/s/g, s)
+            },
+
+            /**搞到更多 */
+            more: function () {
+                this.page_current++
+                this.get_data()
+            },
+
+            nl2br: function (str) {
+                return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2');
+            },
+
+            go_to_top: function () {
+                $("html,body").animate({
+                    scrollTop: 0
+                }, 100);
+            },
+        }
+    })
+</script>
 
 </html>
