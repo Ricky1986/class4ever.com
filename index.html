@@ -73,8 +73,9 @@
             <div class="layui-card">
                 <div class="layui-card-body more">
                     <span v-if="is_loading">加载中...</span>
+
                     <span v-else-if="is_end">没有更多了</span>
-                    <button @click="more" v-else class="layui-btn layui-btn-primary layui-btn-lg"
+                    <button v-else @click="more" class="layui-btn layui-btn-primary layui-btn-lg"
                         style="width:300px;">更多</button>
                 </div>
             </div>
@@ -108,6 +109,7 @@
             <div class="layui-card">
                 <div class="layui-card-header">工具</div>
                 <div class="layui-card-body">
+                    <a href="https://www.layui.com/doc/element/icon.html" target="_blank">Layui字体图标</a>
                     <a href="https://class4ever.com/qrcode.html" target="blank">文字转二维码</a>
                 </div>
             </div>
