@@ -75,9 +75,21 @@ const app = new Vue({
         ],
     },
     mounted: function () {
+        this.go_to_top()
+
         this.get_data()
 
         this.watch_height()
+
+        //todo: 防止重复加载, 去掉"更多按钮", 没有更多后, 停止调用加载
+        $(window).scroll(function () {
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+
+            if (scrollTop + windowHeight == scrollHeight)
+                app.more()
+        })
 
 
     },
@@ -86,7 +98,6 @@ const app = new Vue({
             //距离顶部大于100时出现到顶部按钮
             $(window).on('scroll', () => {
                 var fromTop = $(window).scrollTop(); // 已滚动卷去的高度
-                let windowHeight = $(window).height(); // 可视窗口的高度
 
                 if (fromTop > 100)
                     $('.go-to-top').fadeIn()
@@ -152,6 +163,54 @@ const app = new Vue({
         },
 
         /**
+         * 显示更好看的时间 : 
+         *
+         *   diff(含)   
+         *   0 ~ 86399 今天
+         *   -86400 ~ -1 昨天
+         *   -86400*2 ~ -86401 前天
+         * 
+         * */
+        better_time: function (obj) {
+            let date, diff
+
+            diff = this.get_now() - obj.unixtime
+            if (diff < 60)
+                return diff + '秒前'
+            if (diff < 3600)
+                return parseInt(diff / 60) + '分钟前'
+
+            diff = obj.unixtime - this.get_today()
+
+            if (diff >= 0 && diff <= 86399)
+                date = '今天'
+            else if (diff >= -86400 && diff <= -1)
+                date = '昨天'
+            else if (diff >= -86400 * 2 && diff <= -86401)
+                date = '前天'
+            else
+                date = this.date('Y-m-d', obj.unixtime)
+
+
+            if (obj.type === 'christian')
+                return date
+            else {
+                return date + ' ' + this.date('H:i:s', obj.unixtime)
+            }
+        },
+
+
+        /**取得此刻时间戳 */
+        get_now: function () {
+            return parseInt(new Date().getTime() / 1000)
+        },
+
+        /**取得今天00:00:00的时间戳 */
+        get_today: function () {
+            return new Date(new Date().toDateString()).getTime() / 1000
+        },
+
+        /**
             应用时间格式:
                @param format string 如'Y-m-d H:i:s'
                @param unixtime int Unix时间戳, 如 1604389233
@@ -187,3 +246,5 @@ const app = new Vue({
         },
     }
 })
+
+

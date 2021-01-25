@@ -5,48 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class4ever 开源社区</title>
+    <link rel="shortcut icon" href="/image/favicon.jpg">
+    <link rel="apple-touch-icon" href="/image/favicon.jpg">
     <link rel="stylesheet" href="//static.class4ever.com/layui/v2.5.5/css/layui.css">
     <link rel="stylesheet" href="app.css">
     <style>
-        .title-box {
-            padding: 5px 12px;
-            border-bottom: 1px solid #eee;
+        .copy {
+            font-size: 9px;
+            color: #aaa;
+            line-height: 22px;
+            padding: 8px 20px 12px;
         }
 
-        .title {
-            font: 14px Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif;
-            font-family: PingFang SC, Hiragino Sans GB, Microsoft YaHei, WenQuanYi Micro Hei, Helvetica Neue, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            list-style: none;
-            font-size: 20px;
-            line-height: 1.3;
-            font-weight: 600;
-            margin: 0;
-            vertical-align: baseline;
-            max-height: 1000000px;
-            -webkit-tap-highlight-color: transparent;
-            box-sizing: border-box;
-            background: 0 0;
-            text-decoration: none;
-            outline: 0;
-            cursor: pointer;
-            transition: color .2s ease;
+        .filter button {
+            margin-bottom: 12px;
+        }
+
+        .info-bar {
+            padding: 5px 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .author {
             color: #222;
-            line-height: 32px;
         }
 
-        .title-box a:hover {
-            text-decoration: underline;
-            color: #1e6ddd;
-        }
-
-        .shuoshuo {
-            line-height: 33px;
-        }
-
-        #app {
-            width: 1200px;
-            margin: 0 auto;
+        .post-time {
+            font-size: 13px;
+            margin-left: 10px;
+            color: #666;
         }
     </style>
 </head>
@@ -57,18 +47,21 @@
         <aside id="left" v-cloak>
             <!-- logo -->
             <div class="layui-card">
-                <div class="layui-card-body logo">Class4ever 开源社区</div>
+                <div class="layui-card-body logo">Class4ever</div>
             </div>
             <!-- /logo -->
 
             <!-- 导航 -->
             <div class="layui-card">
-                <div class="layui-card-body filter" style="font-size:0 !important;padding:10px 12px;">
-                    <button @click="set_type('all')" class="layui-btn layui-btn-sm layui-btn-warm">全部</button>
-                    <button @click="set_type('blog')" class="layui-btn layui-btn-sm layui-btn-normal">博客</button>
-                    <button @click="set_type('christian')" class="layui-btn layui-btn-sm">基督徒公众号</button>
-                    <button @click="set_type('shuoshuo')" class="layui-btn layui-btn-sm layui-btn-primary">说说</button>
-                    <button @click="set_type('system')" class="layui-btn layui-btn-sm layui-btn-danger"
+                <div class="layui-card-body filter" style="font-size:0 !important;padding:10px 20px;">
+                    <button @click="set_type('all')"
+                        class="layui-btn layui-btn-sm layui-btn-warm layui-btn-fluid">全部</button>
+                    <button @click="set_type('blog')"
+                        class="layui-btn layui-btn-sm layui-btn-normal layui-btn-fluid">博客</button>
+                    <button @click="set_type('christian')" class="layui-btn layui-btn-sm  layui-btn-fluid">基督徒</button>
+                    <button @click="set_type('shuoshuo')"
+                        class="layui-btn layui-btn-sm layui-btn-primary layui-btn-fluid">说说</button>
+                    <button @click="set_type('system')" class="layui-btn layui-btn-sm layui-btn-danger layui-btn-fluid"
                         style="margin-bottom:0;">系统</button>
                 </div>
             </div>
@@ -79,12 +72,6 @@
         </aside>
 
         <main v-cloak>
-
-            <div class="layui-card">
-                <div class="layui-card-body" style="font-size:22px;">
-                    Update Log
-                </div>
-            </div>
 
             <div v-for="(v,k) in list" class="layui-card">
                 <div class="layui-card-body" style="padding:0;">
@@ -98,17 +85,22 @@
                         </template>
                     </div>
 
-                    <div style="padding:5px 10px;">
-                        <button @click="set_type(get_type(v.site_id).route)" :class="get_type(v.site_id).style"
-                            class="layui-btn layui-btn-sm">{{ get_type(v.site_id).name }}</button>
-                        <span style="font-size:13px;color:#555;margin-left:10px;">
-                            <template v-if="get_type(v.site_id).route === 'christian'">
-                                {{ date('Y-m-d', v.create_at)}}
-                            </template>
-                            <template v-else>
-                                {{ date('Y-m-d H:i:s', v.create_at)}}
-                            </template>
-                        </span>
+                    <div class="info-bar">
+                        <div>
+                            <button @click="set_type(get_type(v.site_id).route)" :class="get_type(v.site_id).style"
+                                class="layui-btn layui-btn-sm">{{ get_type(v.site_id).name }}</button>
+                            <span class="post-time">
+                                {{
+                                better_time({
+                                unixtime : v.create_at,
+                                type : get_type(v.site_id).route
+                                })
+                                }}
+                            </span>
+                        </div>
+                        <div class="author">
+                            Ricky
+                        </div>
                     </div>
 
                 </div>
@@ -117,7 +109,6 @@
             <div class="layui-card">
                 <div class="layui-card-body more">
                     <span v-if="is_loading">加载中...</span>
-
                     <span v-else-if="is_end">没有更多了</span>
                     <button v-else @click="more" class="layui-btn layui-btn-primary layui-btn-lg"
                         style="width:300px;">更多</button>
@@ -131,7 +122,7 @@
             <div class="layui-card">
                 <div class="layui-card-header">友情链接</div>
                 <div class="layui-card-body link">
-                    <a v-for="(v,k) in hotlink" :href="v.uri" target="blank">{{ v.site_name}}</a>
+                    <a v-for="(v,k) in hotlink" :href="v.uri" target="_blank">{{ v.site_name}}</a>
                 </div>
             </div>
 
@@ -153,8 +144,15 @@
             <div class="layui-card">
                 <div class="layui-card-header">工具</div>
                 <div class="layui-card-body">
-                    <a href="https://www.layui.com/doc/element/icon.html" target="_blank">Layui字体图标</a>
-                    <a href="https://class4ever.com/qrcode.html" target="blank">文字转二维码</a>
+                    <p>
+                        <a href="https://www.layui.com/doc/element/icon.html" target="_blank">Layui字体图标</a>
+                    </p>
+                    <p>
+                        <a href="https://class4ever.com/qrcode.html" target="blank">文字转二维码</a>
+                    </p>
+                    <p>
+                        <a href="https://www.kancloud.cn/manual/thinkphp6_0/1037479" target="_blank">ThinkPHP6 开发手册</a>
+                    </p>
                 </div>
             </div>
 
@@ -180,28 +178,17 @@
             </div>
 
             <div class="layui-card">
-                <div class="layui-card-body">
-                    <div class="fly-panel-main" style="font-size:9px;color:#aaa;line-height:20px;">
-                        <p>
-                            Version: 0.0.1
-                        </p>
-                        <p>
-                            <!--CNZZ统计 开始 -->
-                            <span id='cnzz_stat_icon_1277357197'></span>
-                            <script>
-                                var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
-                                var cnzz_s_tag = document.createElement('script');
-                                cnzz_s_tag.type = 'text/javascript';
-                                cnzz_s_tag.async = true;
-                                cnzz_s_tag.charset = 'utf-8';
-                                cnzz_s_tag.src = cnzz_protocol + 's23.cnzz.com/z_stat.php?id=1277357197&online=2';
-                                var root_s = document.getElementsByTagName('script')[0];
-                                root_s.parentNode.insertBefore(cnzz_s_tag, root_s);
-                            </script>
-                            <!--CNZZ统计 结束 -->
-                        </p>
-                        <p>Class4ever也是一个班级通讯录和微信群</p>
-                        <p>信是所望之事的实底, 是未见之事的确据</p>
+                <div class="layui-card-body copy">
+                    <div>Version:
+                        <a href="https://blog.class4ever.com/?p=3028" target="_blank">
+                            0.0.1
+                        </a>
+                    </div>
+                    <div>信是所望之事的实底, 是未见之事的确据</div>
+                    <div>Class4ever也是一个校友录和微信群</div>
+                    <div>北京葡萄枝子科技工作室</div>
+                    <div style="margin-top:6px;">
+                        <img src="/image/cc_by.png" alt="CC BY 4.0" style="height:30px;" title="知识共享 署名 4.0">
                     </div>
                 </div>
         </aside>
