@@ -9,36 +9,6 @@
     <link rel="apple-touch-icon" href="/image/favicon.jpg">
     <link rel="stylesheet" href="//static.class4ever.com/layui/v2.5.5/css/layui.css">
     <link rel="stylesheet" href="app.css">
-    <style>
-        .copy {
-            font-size: 9px;
-            color: #aaa;
-            line-height: 22px;
-            padding: 8px 20px 12px;
-        }
-
-        .filter button {
-            margin-bottom: 12px;
-        }
-
-        .info-bar {
-            padding: 5px 10px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .author {
-            color: #222;
-        }
-
-        .post-time {
-            font-size: 13px;
-            margin-left: 10px;
-            color: #666;
-        }
-    </style>
 </head>
 
 <body>
@@ -122,7 +92,7 @@
             <div class="layui-card">
                 <div class="layui-card-header">友情链接</div>
                 <div class="layui-card-body link">
-                    <a v-for="(v,k) in hotlink" :href="v.uri" target="_blank">{{ v.site_name}}</a>
+                    <a v-for="(v,k) in hotlink" :href="v.uri" target="_blank">{{ v.site_name }}</a>
                 </div>
             </div>
 
@@ -153,6 +123,12 @@
                     <p>
                         <a href="https://www.kancloud.cn/manual/thinkphp6_0/1037479" target="_blank">ThinkPHP6 开发手册</a>
                     </p>
+                    <p>
+                        <a href="https://whois.chinaz.com/" target="_blank">Whois查询</a>
+                    </p>
+                    <p>
+                        <a href="https://icp.chinaz.com/" target="_blank">ICP查询</a>
+                    </p>
                 </div>
             </div>
 
@@ -178,19 +154,34 @@
             </div>
 
             <div class="layui-card">
+                <div class="layui-card-body">
+                    Version:
+                    <a href="https://blog.class4ever.com/?p=3028" target="_blank">
+                        0.1
+                    </a>
+                </div>
+            </div>
+
+            <div class="layui-card">
                 <div class="layui-card-body copy">
-                    <div>Version:
-                        <a href="https://blog.class4ever.com/?p=3028" target="_blank">
-                            0.0.1
+                    <div style="margin-top:6px;margin-bottom:4px;">
+                        <a href="https://baike.baidu.com/item/%E5%85%AC%E6%9C%89%E9%A2%86%E5%9F%9F" target="_blank">
+                            <img src="/image/public_domain.png" alt="CC BY 4.0" style="height:31px;" title="公有领域">
                         </a>
                     </div>
-                    <div>信是所望之事的实底, 是未见之事的确据</div>
-                    <div>Class4ever也是一个校友录和微信群</div>
+                    <div>Class4ever也是一个校友录</div>
+
                     <div>北京葡萄枝子科技工作室</div>
-                    <div style="margin-top:6px;">
-                        <img src="/image/cc_by.png" alt="CC BY 4.0" style="height:30px;" title="知识共享 署名 4.0">
-                    </div>
+                    <div>你若信，就必看见神的荣耀</div>
                 </div>
+
+                <footer>
+                    <div>
+                        <a href="https://beian.miit.gov.cn" target="_blank">
+                            京ICP备14017091号-1
+                        </a>
+                    </div>
+                </footer>
         </aside>
 
         <!-- 回到顶部按钮 -->

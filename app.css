@@ -103,7 +103,7 @@ aside#left {
 
 main {
     width: 680px;
-    margin: 0 25px 30px 185px;
+    margin: 0 20px 30px 180px;
 }
 
 .go-to-top {
@@ -126,4 +126,62 @@ main {
 
 [v-cloak] {
     display: none;
+}
+
+.copy {
+    font-size: 9px;
+    color: #aaa;
+    line-height: 22px;
+    padding: 8px 20px 12px;
+}
+
+.filter button {
+    margin-bottom: 12px;
+}
+
+.info-bar {
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.author {
+    color: #222;
+}
+
+.post-time {
+    font-size: 13px;
+    margin-left: 10px;
+    color: #666;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+footer a, footer a:hover {
+    color: #222;
+    font-weight: 600;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer>div {
+    background: rgba(155, 155, 155, .5);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }

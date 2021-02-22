@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="//static.class4ever.com/layui/v2.5.5/css/layui.css">
+</head>
+
+<body>
+  <div id="app" style="font-size:83px;padding:30px;">
+    {{ count }}
+  </div>
+</body>
+<script src="//static.class4ever.com/layui/v2.5.5/layui.all.js"></script>
+<script src="//static.class4ever.com/vuejs/v2.6.12/vue.min.js"></script>
+<script>
+  const $ = layui.$,
+    app = new Vue({
+      el: '#app',
+      data: {
+        count: '',
+      },
+      mounted: function () {
+        setInterval(function () {
+          app.get_count()
+        }, 500)
+      },
+      methods: {
+        get_count: function () {
+          $.get('http://api.ltmic.com/doc/total', {}, function (res) {
+            if (res.code === 200)
+              app.count = res.data.count
+
+          })
+        }
+      },
+    })
+</script>
+
+</html>

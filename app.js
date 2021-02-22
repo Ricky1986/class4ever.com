@@ -16,6 +16,10 @@ const app = new Vue({
             site_name: 'GitHub'
         },
         {
+            uri: 'https://learnku.com/',
+            site_name: 'LearnKu'
+        },
+        {
             uri: '//segmentfault.com/',
             site_name: 'SegmentFault'
         },
@@ -52,24 +56,16 @@ const app = new Vue({
             site_name: 'Gitee'
         },
         {
-            uri: 'https://whois.chinaz.com/',
-            site_name: 'Whois查询'
-        },
-        {
-            uri: 'https://icp.chinaz.com/',
-            site_name: 'ICP查询'
-        },
-        {
             uri: 'https://blog.class4ever.com/',
             site_name: '话语的服侍'
         },
         {
             uri: 'https://gitee.com/ricky1986',
-            site_name: 'ricky@Gitee'
+            site_name: 'Ricky@Gitee'
         },
         {
             uri: 'https://github.com/ricky1986',
-            site_name: 'ricky@GitHub'
+            site_name: 'Ricky@GitHub'
         },
 
         ],
@@ -83,11 +79,17 @@ const app = new Vue({
 
         //todo: 防止重复加载, 去掉"更多按钮", 没有更多后, 停止调用加载
         $(window).scroll(function () {
-            var scrollTop = $(this).scrollTop();
-            var scrollHeight = $(document).height();
-            var windowHeight = $(this).height();
+            let scrollTop = $(this).scrollTop();
+            let scrollHeight = $(document).height();
+            let windowHeight = $(this).height();
 
-            if (scrollTop + windowHeight == scrollHeight)
+            console.log('-----')
+            console.log(scrollTop)
+            console.log(scrollHeight)
+            console.log(windowHeight)
+
+
+            if (!app.is_loading && scrollTop + windowHeight > scrollHeight - 10)
                 app.more()
         })
 
